@@ -22,7 +22,7 @@ class Item(Resource):
     @jwt_required()
     def get(self, name):
         item = ItemModel.find_by_name(name)
-        return item.json() if item else {'message': 'Item not found'}, 404
+        return (item.json(), 200) if item else ({'message': 'Item not found'}, 404)
 
     def post(self, name):
         if ItemModel.find_by_name(name):
